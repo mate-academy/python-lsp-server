@@ -395,6 +395,9 @@ class PythonLSPServer(MethodDispatcher):
             return
         added = event.get('added', [])
         removed = event.get('removed', [])
+        
+        if len(added) == len(removed) == 1 and added[0]['uri'] == removed[0]['uri']:
+            return
 
         for removed_info in removed:
             if 'uri' in removed_info:
